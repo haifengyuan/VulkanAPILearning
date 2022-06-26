@@ -1,0 +1,6 @@
+﻿  mian.cpp
+  VulkanRender.cpp
+D:\Vulkan\VulkanAPILearning\VulkanAPI\VulkanAPI\VulkanRender.cpp(584,20): warning C4804: “>”: 在操作中使用类型“bool”不安全
+  正在生成代码...
+LINK : warning LNK4098: 默认库“MSVCRT”与其他库的使用冲突；请使用 /NODEFAULTLIB:library
+  VulkanAPI.vcxproj -> D:\Vulkan\VulkanAPILearning\VulkanAPI\x64\Debug\VulkanAPI.exe
