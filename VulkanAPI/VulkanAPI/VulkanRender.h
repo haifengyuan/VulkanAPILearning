@@ -7,6 +7,7 @@
 #include<set>
 #include<vector>
 #include<algorithm>
+#include<array>
 #include "VulkanValidation.h"
 #include"Utilities.h"
 class VulkanRender
@@ -15,6 +16,7 @@ public:
 	VulkanRender();
 
 	int init(GLFWwindow* newWindow);
+	void draw();
 	void cleanup();
 
 
@@ -38,13 +40,25 @@ private:
 	VkSurfaceKHR surface;
 	VkSwapchainKHR swapChain;
 	std::vector<SwapChainImage> swapChainImages;
+	std::vector<VkFramebuffer> swapChainFramebuffers;
+	std::vector<VkCommandBuffer> commandbuffers;
 
 	//-PipeLine
+	VkPipeline graphicsPipeline;
 	VkPipelineLayout pipelineLayout;
+	VkRenderPass renderPass;
+
+
+	//-Pools
+	VkCommandPool graphicsCommandPool;
 
 	//-Utility
 	VkFormat swapChainImageFormat;
 	VkExtent2D swapChainExtent;
+
+	//-Synchronisation
+	VkSemaphore imageAvailable;
+	VkSemaphore renderFinished;
 
 	//Vulkan Functions
 	//-Create Function
@@ -55,6 +69,13 @@ private:
 	void createSwapChain();
 	void createRenderPass();
 	void createGraphicsPipeline();
+	void createFramebuffers();
+	void createCommandPool();
+	void createCommandBuffers();
+	void createSynchronisation();
+
+	//-Get Functions
+	void recordCommands();
 
 	//-Get Functions
 	void getPhysicalDevice();

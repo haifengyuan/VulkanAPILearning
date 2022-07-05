@@ -45,6 +45,7 @@ int main() {
     while (!glfwWindowShouldClose(window))
     {
         glfwWaitEvents();
+        vulkanRender.draw();
     }
 
     vulkanRender.cleanup();
