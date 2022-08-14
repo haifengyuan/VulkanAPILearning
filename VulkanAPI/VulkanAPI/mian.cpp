@@ -6,6 +6,8 @@
 //#include <glm/mat4x4.hpp>
 //#include <glm/mat4x4.hpp>
 
+#define STB_IMAGE_IMPLEMENTATION
+#define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #define GLFW_INCLUDE_VULKAN
 #include<GLFW/glfw3.h>
 
@@ -40,11 +42,34 @@ int main() {
         return EXIT_FAILURE;
     }
     
+    float angle = 0.0f;
+    float deltaTime = 0.0f;
+    float lastTime = 0.0f;
 
     //Loop until close
     while (!glfwWindowShouldClose(window))
     {
-        glfwWaitEvents();
+        glfwPollEvents();
+        float now = glfwGetTime();
+        deltaTime = now - lastTime;
+        lastTime = now;
+
+        angle += 10.0f * deltaTime;
+        if (angle > 360.f) { angle -= 360.0f; };
+
+        glm::mat4 firstModel(1.0f);
+        glm::mat4 secondModel(1.0f);
+        firstModel = glm::translate(firstModel, glm::vec3(0.0f, 0.0f, -2.f));
+        firstModel = glm::rotate(firstModel, glm::radians(angle), glm::vec3(0.0f, 0.0f, 1.0f));
+        secondModel = glm::translate(secondModel, glm::vec3(0.0f, 0.0f, -2.01f));
+        secondModel = glm::rotate(secondModel, glm::radians(angle * -10), glm::vec3(0.0f, 0.0f, 1.0f));
+        vulkanRender.updateModel(0, firstModel);
+        vulkanRender.updateModel(1, secondModel);
+
+        //vulkanRender.updateModel(glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, 0.0f, 1.0f)));
+      
+
+      
         vulkanRender.draw();
     }
 
