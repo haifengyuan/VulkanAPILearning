@@ -13,6 +13,7 @@ struct Vertex
 {
 	glm::vec3 pos;		//Vertex Position
 	glm::vec3 color;	//Vertex Color (r,g,b)
+	glm::vec2 tex;		//Texture Coords (u,v)
 };
 
 //Indices (location) of Quenue Families (if they exitat all)
