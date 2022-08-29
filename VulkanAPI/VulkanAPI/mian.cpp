@@ -46,6 +46,8 @@ int main() {
     float deltaTime = 0.0f;
     float lastTime = 0.0f;
 
+   int thismodelIndex= vulkanRender.createMeshModel("Models/chopper.obj");
+   //int thismodelIndex = vulkanRender.createMeshModel("Models/Tree.obj");
     //Loop until close
     while (!glfwWindowShouldClose(window))
     {
@@ -57,17 +59,9 @@ int main() {
         angle += 10.0f * deltaTime;
         if (angle > 360.f) { angle -= 360.0f; };
 
-        glm::mat4 firstModel(1.0f);
-        glm::mat4 secondModel(1.0f);
-        firstModel = glm::translate(firstModel, glm::vec3(0.0f, 0.0f, -2.f));
-        firstModel = glm::rotate(firstModel, glm::radians(angle), glm::vec3(0.0f, 0.0f, 1.0f));
-        secondModel = glm::translate(secondModel, glm::vec3(0.0f, 0.0f, -2.01f));
-        secondModel = glm::rotate(secondModel, glm::radians(angle * -10), glm::vec3(0.0f, 0.0f, 1.0f));
-        vulkanRender.updateModel(0, firstModel);
-        vulkanRender.updateModel(1, secondModel);
-
-        //vulkanRender.updateModel(glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, 0.0f, 1.0f)));
-      
+        glm::mat4 testMat = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
+        //testMat= glm::translate(testMat, glm::vec3(0.0f, 0.0f, 4.0f));
+        vulkanRender.updateModel(thismodelIndex,testMat);
 
       
         vulkanRender.draw();

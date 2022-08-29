@@ -5,7 +5,7 @@
 #include<GLFW/glfw3.h>
 #include<glm/glm.hpp>
 const int MAX_FRAME_DRAWS = 2;
-const int MAX_OBJECTS = 2;
+const int MAX_OBJECTS = 200;
 const std::vector<const char*>deviceExtensions = {VK_KHR_SWAPCHAIN_EXTENSION_NAME};
 
 

@@ -6,6 +6,10 @@
 #include<glm/glm.hpp>
 #include<glm/gtc/matrix_transform.hpp>
 
+#include<assimp/Importer.hpp>
+#include<assimp/scene.h>
+#include<assimp/postprocess.h>
+
 #include<stdexcept>
 #include<set>
 #include<vector>
@@ -15,6 +19,7 @@
 #include "VulkanValidation.h"
 #include"Utilities.h"
 #include"Mesh.h"
+#include"MeshModel.h"
 class VulkanRender
 {
 public:
@@ -22,6 +27,7 @@ public:
 
 	int init(GLFWwindow* newWindow);
 
+	int createMeshModel(std::string modelFile);
 	void updateModel(int modelId, glm::mat4 newModel);
 	void draw();
 	void cleanup();
@@ -35,7 +41,8 @@ private:
 	int currentFrame = 0;
 
 	//Scene Objects
-	 std::vector<Mesh> meshList;
+	 //std::vector<Mesh> meshList;
+	std::vector<MeshModel> modelList;
 	
 	//Scene Settings
 	 struct UboViewProjection
@@ -63,22 +70,30 @@ private:
 	std::vector<VkFramebuffer> swapChainFramebuffers;
 	std::vector<VkCommandBuffer> commandbuffers;
 
-	VkImage depthBufferImage;
-	VkDeviceMemory depthBufferImageMemory;
-	VkImageView depthBufferImageView;
+
+	std::vector<VkImage> colorBufferImage;
+	std::vector<VkDeviceMemory> colorBufferImageMemory;
+	std::vector<VkImageView> colorBufferImageView;
+
+	std::vector<VkImage> depthBufferImage;
+	std::vector<VkDeviceMemory> depthBufferImageMemory;
+	std::vector<VkImageView> depthBufferImageView;
 
 	VkSampler textureSampler;
 
 	// -Descriptors
 	VkDescriptorSetLayout descriptorSetLayout;
 	VkDescriptorSetLayout samplerSetLayout;
+	VkDescriptorSetLayout inputSetLayout;
 	VkPushConstantRange pushConstantRange;
 
 
 	VkDescriptorPool descriptorPool;
 	VkDescriptorPool samplerDescriptorPool;
+	VkDescriptorPool inputDescriptorPool;
 	std::vector<VkDescriptorSet> descriptorSets;
 	std::vector<VkDescriptorSet> samplerDescriptorSets;
+	std::vector<VkDescriptorSet> inputDescriptorSets;
 
 	std::vector<VkBuffer> vpUniformBuffer;		//viewProjection uniform buffer
 	std::vector<VkDeviceMemory> vpUniformBufferMemory;
@@ -92,6 +107,7 @@ private:
 
 	//-Assets
 	
+
 	std::vector<VkImage> textureImages;
 	std::vector<VkDeviceMemory> textureImageMemory;
 	std::vector<VkImageView> textureImageViews;
@@ -99,6 +115,10 @@ private:
 	//-PipeLine
 	VkPipeline graphicsPipeline;
 	VkPipelineLayout pipelineLayout;
+
+	VkPipeline secondPipeline;
+	VkPipelineLayout secondPipelineLayout;
+
 	VkRenderPass renderPass;
 
 
@@ -127,6 +147,7 @@ private:
 	void createDescriptorSetLayout();
 	void createPushConstantRange();
 	void createGraphicsPipeline();
+	void createColorBufferImage();
 	void createDepthBufferImage();
 	void createFramebuffers();
 	void createCommandPool();
@@ -137,6 +158,7 @@ private:
 	void createUniformBuffers();
 	void createDescriptorPool();
 	void createDescriptorSets();
+	void createInputDescriptorSets();
 
 	void updateUniformBuffers(uint32_t imageIndex);
 
@@ -176,6 +198,7 @@ private:
 	int createTextureImage(std::string fileName);
 	int createTexture(std::string fileName);
 	int createTextureDescriptor(VkImageView textureImage);
+	
 
 	//--Loader Functions
 	stbi_uc* loadTextureFile(std::string fileNmae, int * width, int* height, VkDeviceSize* imageSize);
