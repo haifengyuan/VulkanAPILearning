@@ -1,0 +1,10 @@
+﻿  VulkanRender.cpp
+D:\Vulkan\VulkanAPILearning\VulkanAPI\VulkanAPI\Utilities.h(86,12): warning C4267: “return”: 从“size_t”转换到“uint32_t”，可能丢失数据
+D:\Vulkan\VulkanAPILearning\VulkanAPI\VulkanAPI\VulkanRender.cpp(918,47): warning C4552: ”-“: 未使用表达式结果
+D:\Vulkan\VulkanAPILearning\VulkanAPI\VulkanAPI\VulkanRender.cpp(1273,54): warning C4267: “=”: 从“size_t”转换到“uint32_t”，可能丢失数据
+D:\Vulkan\VulkanAPILearning\VulkanAPI\VulkanAPI\VulkanRender.cpp(1675,20): warning C4804: “>”: 在操作中使用类型“bool”不安全
+D:\Vulkan\VulkanAPILearning\VulkanAPI\VulkanAPI\VulkanRender.cpp(2031,33): warning C4267: “return”: 从“size_t”转换到“int”，可能丢失数据
+D:\Vulkan\VulkanAPILearning\VulkanAPI\VulkanAPI\VulkanRender.cpp(2090,41): warning C4267: “return”: 从“size_t”转换到“int”，可能丢失数据
+D:\Vulkan\VulkanAPILearning\VulkanAPI\VulkanAPI\VulkanRender.cpp(2131,29): warning C4267: “return”: 从“size_t”转换到“int”，可能丢失数据
+D:\Vulkan\VulkanAPILearning\VulkanAPI\VulkanAPI\Utilities.h(89): warning C4715: “findMemoryTypeIndex”: 不是所有的控件路径都返回值
+  VulkanAPI.vcxproj -> D:\Vulkan\VulkanAPILearning\VulkanAPI\x64\Debug\VulkanAPI.exe
